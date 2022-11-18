@@ -1,0 +1,46 @@
+$java -jar payara-micro-5.2022.2.jar --deploy MSAApp/artifact/MSAApp.war --port 8585
+
+$java -jar payara-micro-5.2022.2.jar --deploy MSAClient/artifact/MSAClient.war --port 8586
+
+
+(Authorization)
+
+$java -jar jwtenizr.jar 
+
+(Utility)
+create a folder keys in our project folder 
+cd /ict/cc/keys
+
+$openssl genrsa -out baseKey.pem 
+
+$openssl pkcs8 -topk8 -inform PEM -in baseKey.pem -out privateKey.pem -nocrypt
+
+$openssl rsa -in baseKey.pem -pubout -outform PEM -out publicKey.pem
+
+
+payara micro unzip -> Micro-INF -> domain -> domain.xml file copy and paste our folder
+(change the code )
+<jdbc-connection-pool
+        datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" name="ictpool"
+        res-type="javax.sql.DataSource"
+        steady-pool-size="1"
+        is-connection-validation-required="true"
+        connection-validation-method="meta-data"
+        max-pool-size="10">
+    <property name="password" value="dhruvi2201"/>
+    <property name="user" value="root"/>
+    <property name="databaseName" value="test"/>
+    <property name="serverName" value="localhost"/>
+    <property name="portNumber" value="3306"/>
+    <property name="UseSSL" value="false"/>
+    <property name="zeroDateTimeBehavior" value="convertToNull"/>
+</jdbc-connection-pool>
+
+<jdbc-resource pool-name="ictpool" jndi-name="jdbc/dbict"/>
+
+
+(run database with payaramicro command)
+
+$java -jar payara-micro-5.2022.2.jar --deploy MSAApp/artifact/MSAApp.war --port 8585 --addlibs mysql-connector-java-5.0.8-bin.jar --domainConfig domain.xml
+
+$java -jar payara-micro-5.2022.2.jar --deploy MSAClient/artifact/MSAClient.war --port 8086 --addlibs mysql-connector-java-8.0.23.jar --domainConfig domain.xml

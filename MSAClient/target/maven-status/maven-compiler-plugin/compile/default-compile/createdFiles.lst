@@ -1,0 +1,9 @@
+servlet\ClientServlet.class
+ictmsa\msaclient\config\Producers.class
+ictmsa\msaclient\service\HealthCheckService.class
+client\RemoteClient.class
+entity\Department.class
+entity\Employee.class
+ictmsa\msaclient\config\CrossOriginResourceSharingFilter.class
+ictmsa\msaclient\config\BootStrap.class
+ictmsa\msaclient\service\ExampleService.class

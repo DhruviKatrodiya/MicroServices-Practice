@@ -1,0 +1,12 @@
+bean\DataBean.class
+ictmsa\msaapp\config\Producers.class
+entity\Employee.class
+entity\Employee_.class
+ictmsa\msaapp\config\BootStrap.class
+entity\Department_.class
+ictmsa\msaapp\service\ExampleService.class
+ictmsa\msaapp\config\CrossOriginResourceSharingFilter.class
+ictmsa\msaapp\service\HealthCheckService.class
+servlet\MSAServlet.class
+client\MSAClient.class
+entity\Department.class
